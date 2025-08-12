@@ -30,7 +30,7 @@ const baseData = { users: usersJson as User[], trips: tripsJson as Trip[], itine
 export const useJamesStore = create<JamesState>()(
   persist(
     (set, get) => ({
-      now: initialNow, phase: 'N-90', ...baseData, actions: [], logs: [], chat: [],
+      now: initialNow, phase: 'N-90', ...baseData, actions: [], logs: [], chat: [{ id:'a_welcome', role:'assistant', text:'Olá! Estou aqui para garantir uma viagem leve. Pergunte pelo **plano de hoje** ou use /chuva, /fila, /greve.', ts: new Date().toISOString() }],
       addMessage: (m) => set({ chat: [...get().chat, m] }),
       askJames: (text) => {
         const s = get()
