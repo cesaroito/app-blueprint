@@ -1,5 +1,6 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader'
+import Callout from '@/components/Callout'
 import { imageForItinerary } from '@/lib/images';
 import { useJamesStore } from "@/lib/store";
 import { Card, Button, Pill, SectionTitle } from "@/components/ui";
@@ -79,17 +80,22 @@ const Present: React.FC = () => {
           {actions.length === 0 ? (
             <div className="text-sm text-gray-600">Sem ações no momento.</div>
           ) : (
-            <ul className="text-sm">
-              {actions.map((a: any) => (
-                <li key={a.id} className="py-2 border-b last:border-none flex items-center justify-between">
-                  <div>
-                    <div className="font-medium">{a.titulo}</div>
-                    <div className="text-gray-600">{a.justificativa}</div>
-                  </div>
-                  <Pill>{a.status ?? "proposta"}</Pill>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="text-sm">
+                {actions.map((a: any) => (
+                  <li key={a.id} className="py-2 border-b last:border-none flex items-center justify-between">
+                    <div>
+                      <div className="font-medium">{a.titulo}</div>
+                      <div className="text-gray-600">{a.justificativa}</div>
+                    </div>
+                    <Pill>{a.status ?? "proposta"}</Pill>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-3">
+                <Callout>Mostre aqui como a ação aparece primeiro como proposta e só é aplicada após aprovação.</Callout>
+              </div>
+            </>
           )}
         </Card>
 
