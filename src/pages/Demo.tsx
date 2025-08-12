@@ -9,8 +9,19 @@ const buttons = [
 ]
 const phases = ['N-90', 'N-60', 'N-30', 'DIA1', 'DIA3', 'POS'] as const
 
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms))
+
 export default function Demo() {
   const { fireEventById, moveToPhase, phase, reset } = useJamesStore()
+
+  const handleAutoPlay = async () => {
+    moveToPhase('N-90'); await delay(400)
+    moveToPhase('N-60'); await delay(400)
+    moveToPhase('N-30'); await delay(400)
+    moveToPhase('DIA1'); fireEventById('ev_weather_light_drizzle'); await delay(600)
+    fireEventById('ev_vatican_queue_high'); await delay(600)
+    moveToPhase('DIA3'); fireEventById('ev_train_partial_strike')
+  }
 
   return (
     <div className="space-y-4">
@@ -43,6 +54,7 @@ export default function Demo() {
               {p}
             </Button>
           ))}
+          <Button onClick={handleAutoPlay} variant="secondary">Auto-play Roma (3min)</Button>
           <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
         </div>
       </Card>
