@@ -9,6 +9,7 @@ export default function Index(){
           <a href="/present"><Button>Modo apresentação</Button></a>
           <a href="/demo"><Button variant="secondary">Console de Cenários</Button></a>
         </div>
+        <a href="/chat"><Button variant="ghost">Chat do James</Button></a>
       </div>
       <div className="grid md:grid-cols-3 gap-4">
         <Card><h3 className="font-semibold mb-1">Viajante</h3><p className="text-sm text-gray-600 mb-3">Timeline, ações e dicas.</p><a href="/traveler"><Button variant="ghost">Abrir</Button></a></Card>

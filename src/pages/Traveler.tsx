@@ -26,6 +26,7 @@ export default function Traveler() {
       </div>
       <div className="rounded-2xl p-6 mb-4 text-brand-foreground" style={{background:'var(--brand-gradient)'}}>
         <h1 className="text-2xl font-semibold">{copy.slogan}</h1>
+        <div className="mt-2"><a href="/chat"><Button variant="secondary">Abrir chat</Button></a></div>
         <div className="text-sm opacity-90 mt-1">Assistente proativo, tecnologia discreta.</div>
         <div className="mt-2"><Pill>{trip?.titulo} — {phase}</Pill></div>
       </div>
