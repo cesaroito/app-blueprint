@@ -15,6 +15,8 @@ export default function Index(){
         <Card><h3 className="font-semibold mb-1">Viajante</h3><p className="text-sm text-gray-600 mb-3">Timeline, ações e dicas.</p><a href="/traveler"><Button variant="ghost">Abrir</Button></a></Card>
         <Card><h3 className="font-semibold mb-1">Consultor</h3><p className="text-sm text-gray-600 mb-3">Aprovação humana.</p><a href="/consultant"><Button variant="ghost">Abrir</Button></a></Card>
         <Card><h3 className="font-semibold mb-1">Demo</h3><p className="text-sm text-gray-600 mb-3">Eventos e fases.</p><a href="/demo"><Button variant="ghost">Abrir</Button></a></Card>
+        <Card><h3 className="font-semibold mb-1">Chat</h3><p className="text-sm text-gray-600 mb-3">Converse com o James.</p><a href="/chat"><Button variant="ghost">Abrir</Button></a></Card>
+        <Card><h3 className="font-semibold mb-1">Palco</h3><p className="text-sm text-gray-600 mb-3">Tela limpa para apresentação.</p><a href="/stage"><Button variant="ghost">Abrir</Button></a></Card>
       </div>
     </div>
   )
