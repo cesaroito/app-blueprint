@@ -1,0 +1,8 @@
+[
+ {"id":"i1","tripId":"t1","tipo":"voo","titulo":"GRU → FCO","quando":"2025-10-10T22:15:00-03:00","local":"Aeroporto de Guarulhos","meta":{"companhia":"AZ","reserva":"AZ671"}},
+ {"id":"i2","tripId":"t1","tipo":"transfer","titulo":"Transfer para hotel","quando":"2025-10-11T14:30:00+02:00","local":"FCO → Hotel Artemide","meta":{"placa":"ROM-2025"}},
+ {"id":"i3","tripId":"t1","tipo":"museu","titulo":"Galleria Borghese","quando":"2025-10-11T16:00:00+02:00","local":"Piazzale Scipione Borghese, 5","meta":{"voucher":"BOR-4451"}},
+ {"id":"i4","tripId":"t1","tipo":"passeio","titulo":"Trastevere walking","quando":"2025-10-11T18:30:00+02:00","local":"Trastevere"},
+ {"id":"i5","tripId":"t1","tipo":"museu","titulo":"Vaticano (Museus + Capela Sistina)","quando":"2025-10-12T09:30:00+02:00","local":"Viale Vaticano, 6"},
+ {"id":"i6","tripId":"t1","tipo":"trem","titulo":"Roma → Florença (Trenitalia)","quando":"2025-10-13T09:40:00+02:00","local":"Roma Termini","meta":{"vagao":"4","assentos":"12A/12B"}}
+]

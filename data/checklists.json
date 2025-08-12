@@ -1,0 +1,6 @@
+[
+ {"id":"c1","tripId":"t1","titulo":"Vacina febre amarela","due":"2025-07-12","status":"aberto"},
+ {"id":"c2","tripId":"t1","titulo":"Seguro viagem","due":"2025-09-01","status":"aberto"},
+ {"id":"c3","tripId":"t1","titulo":"Adaptador tipo F (Europa)","due":"2025-10-01","status":"aberto"},
+ {"id":"c4","tripId":"t1","titulo":"Reserva de jantar (Aroma)","due":"2025-09-20","status":"aberto"}
+]
