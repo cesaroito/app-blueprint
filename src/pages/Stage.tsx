@@ -16,10 +16,10 @@ export default function Stage(){
 
   return (
     <div className="fixed inset-0 bg-black">
-      <div className="absolute inset-0" style={{background:'var(--brand-gradient)', opacity:.25}}/>
+      <div className="absolute inset-0 mesh-bg" style={{ opacity: .25 }}/>
       <div className="relative h-full mx-auto max-w-5xl p-6 flex flex-col">
         <div className="flex items-center gap-3 mb-4">
-          <h1 className="text-white text-2xl font-bold drop-shadow">James • Palco</h1>
+          <h1 className="text-white h-display font-bold drop-shadow">James • Palco</h1>
           <Pill>{phase}</Pill>
           <div className="ml-auto flex gap-2">
             <Button className="bg-white/90" onClick={()=>askJames('Qual o plano para hoje?')}>Plano</Button>
@@ -28,7 +28,7 @@ export default function Stage(){
             <Button className="bg-white/90" onClick={()=>{ moveToPhase('DIA3'); fireEventById('ev_train_partial_strike') }}>Greve</Button>
           </div>
         </div>
-        <div className="flex-1 overflow-auto rounded-2xl bg-white/95 p-4 space-y-2">
+        <div className="flex-1 overflow-auto rounded-xxl bg-white/95 p-4 space-y-2 shadow-elev">
           {chat.map(m=>(
             <div key={m.id} className={`text-lg flex ${m.role==='user'?'justify-end':''}`}>
               <div className={`max-w-[75%] rounded-2xl px-4 py-3 ${m.role==='user'?'bg-brand-secondary text-white':'bg-white border'} shadow`}>
