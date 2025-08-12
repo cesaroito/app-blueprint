@@ -19,14 +19,11 @@ export default function Traveler() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-semibold">
-        {trip?.titulo} <Pill>{phase}</Pill>
-      </h1>
-
-      <Card>
-        <h2 className="font-semibold mb-2">{copy.slogan}</h2>
-        <p className="text-sm text-gray-600">Assistente proativo, tecnologia discreta.</p>
-      </Card>
+      <div className="rounded-2xl p-6 mb-4 text-brand-foreground" style={{background:'var(--brand-gradient)'}}>
+        <h1 className="text-2xl font-semibold">{copy.slogan}</h1>
+        <div className="text-sm opacity-90 mt-1">Assistente proativo, tecnologia discreta.</div>
+        <div className="mt-2"><Pill>{trip?.titulo} — {phase}</Pill></div>
+      </div>
 
       {openActions.map(a => (
         <Card key={a.id}>
@@ -34,11 +31,12 @@ export default function Traveler() {
             <div>
               <div className="font-medium">{a.titulo}</div>
               <div className="text-sm text-gray-600">{a.justificativa}</div>
+              <div className="text-xs text-gray-500 mt-1">{copy.labels.explainWhy}</div>
               <div className="text-xs text-gray-500 mt-1">
                 Status: {a.status === 'aprovada' ? 'Aprovada pelo consultor' : 'Aguardando aprovação'}
               </div>
             </div>
-            <Button disabled className="bg-brand-primary text-brand-foreground">
+            <Button disabled variant={a.status === 'aprovada' ? 'secondary' : 'primary'}>
               {a.status === 'aprovada' ? 'Confirmado' : 'Pendente'}
             </Button>
           </div>
