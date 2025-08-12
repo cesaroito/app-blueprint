@@ -1,6 +1,7 @@
 import React from "react";
 import { useJamesStore } from "@/lib/store";
 import { Card, Button, Pill, SectionTitle } from "@/components/ui";
+import { IMG, imageForItinerary } from "@/lib/images";
 
 const steps = [
   { name: "Pré-embarque N-90", run: (s: any) => s.moveToPhase("N-90") },
@@ -47,6 +48,7 @@ const Present: React.FC = () => {
         style={{ background: "var(--brand-gradient)" }}
       >
         <div className="container mx-auto">
+          <img src={IMG.hero} alt="Roma" className="w-full h-56 object-cover rounded-xl mb-4 opacity-90" />
           <h1 className="text-3xl md:text-4xl font-bold drop-shadow">Viaje leve. O James cuida.</h1>
           <div className="mt-2 opacity-90">Concierge proativo, tecnologia discreta.</div>
           {trip && (
@@ -98,6 +100,10 @@ const Present: React.FC = () => {
           <ul className="text-sm grid md:grid-cols-2 gap-2">
             {itinerary.slice(0, 4).map((i: any) => (
               <li key={i.id} className="p-2 rounded-lg bg-brand-muted">
+                {(() => {
+                  const src = imageForItinerary(i.titulo)
+                  return src ? <img src={src} alt={i.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
+                })()}
                 <div className="font-medium">{i.titulo}</div>
                 <div className="text-xs text-gray-600">
                   {new Date(i.quando).toLocaleString()} — {i.local}
