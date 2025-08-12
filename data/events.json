@@ -1,0 +1,6 @@
+[
+ {"id":"ev_vaccine_reminder","tipo":"documento","tripId":"t1","data":"2025-07-12T09:00:00-03:00","payload":{"documento":"vacina_febre_amarela","status":"pendente"}},
+ {"id":"ev_weather_light_drizzle","tipo":"weather","tripId":"t1","data":"2025-10-11T15:30:00+02:00","payload":{"cidade":"Roma","duracaoMin":30,"intensidade":"leve"}},
+ {"id":"ev_vatican_queue_high","tipo":"queue","tripId":"t1","data":"2025-10-12T08:00:00+02:00","payload":{"atracao":"Museus do Vaticano","indiceFila":90}},
+ {"id":"ev_train_partial_strike","tipo":"strike","tripId":"t1","data":"2025-10-13T07:00:00+02:00","payload":{"modal":"trem","afetados":["Trenitalia"],"severidade":"parcial"}}
+]

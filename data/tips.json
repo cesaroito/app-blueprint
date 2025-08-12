@@ -1,0 +1,6 @@
+[
+ {"id":"tip1","cidade":"Roma","tag":"gelato","titulo":"Otaleg!","texto":"Peça o pistache.","geo":{"lat":41.889,"lng":12.468}},
+ {"id":"tip2","cidade":"Roma","tag":"vista","titulo":"Janiculum (Gianicolo)","texto":"Pôr do sol imperdível.","geo":{"lat":41.891,"lng":12.454}},
+ {"id":"tip3","cidade":"Roma","tag":"massa","titulo":"Roscioli","texto":"Carbonara clássica.","geo":{"lat":41.895,"lng":12.474}},
+ {"id":"tip4","cidade":"Roma","tag":"café","titulo":"Sant'Eustachio","texto":"Espresso tradicional romano.","geo":{"lat":41.899,"lng":12.476}}
+]

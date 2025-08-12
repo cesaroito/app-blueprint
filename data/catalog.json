@@ -1,0 +1,10 @@
+{
+ "museus":[
+  {"id":"m_borghese","nome":"Galleria Borghese","slots":["2025-10-11T16:00:00+02:00","2025-10-11T18:00:00+02:00"]},
+  {"id":"m_capitoline","nome":"Museus Capitolinos","slots":["2025-10-11T17:00:00+02:00"]}
+ ],
+ "trens":[
+  {"id":"tr_italo_1010","operadora":"Italo","origem":"Roma Termini","destino":"Firenze SMN","quando":"2025-10-13T10:10:00+02:00","tarifa":"Igual"},
+  {"id":"tr_fr_1040","operadora":"Frecciarossa","origem":"Roma Termini","destino":"Firenze SMN","quando":"2025-10-13T10:40:00+02:00","tarifa":"+5%"}
+ ]
+}
