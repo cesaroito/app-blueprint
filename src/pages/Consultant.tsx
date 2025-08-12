@@ -1,6 +1,6 @@
 'use client'
 import { useJamesStore } from '@/lib/store'
-import { Card, Button } from '@/components/ui'
+import { Card, Button, SectionTitle } from '@/components/ui'
 import { Tour } from '@/components/Tour'
 import { tourStepsConsultant } from '@/lib/tour'
 
@@ -12,35 +12,38 @@ export default function Consultant() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-semibold">Fila do Consultor</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">Fila do Consultor</h1>
+        <p className="text-sm text-gray-600">Orquestração com aprovação humana.</p>
+      </div>
 
       <Card>
-        <h2 className="font-semibold mb-2">Propostas pendentes</h2>
+        <SectionTitle>Propostas pendentes</SectionTitle>
         {pending.length === 0 && (
           <div className="text-sm text-gray-500">Nenhuma proposta.</div>
         )}
         {pending.map(a => (
-          <div key={a.id} className="py-3 border-b last:border-none flex items-center justify-between">
+          <div key={a.id} className="py-3 border-b last:border-none flex items-center justify-between hover:bg-brand-muted rounded-lg px-3 transition-colors">
             <div>
               <div className="font-medium">{a.titulo}</div>
               <div className="text-sm text-gray-600">{a.justificativa}</div>
             </div>
-            <div className="flex gap-2">
-              <Button onClick={() => approveAction(a.id, me.id)} className="bg-success text-white">Aprovar</Button>
-              <Button onClick={() => rejectAction(a.id, me.id)} className="bg-danger text-white">Rejeitar</Button>
+            <div className="flex gap-3">
+              <Button variant="secondary" onClick={() => approveAction(a.id, me.id)}>Aprovar</Button>
+              <Button variant="secondary" onClick={() => rejectAction(a.id, me.id)} className="bg-danger text-white">Rejeitar</Button>
             </div>
           </div>
         ))}
       </Card>
 
       <Card>
-        <h2 className="font-semibold mb-2">Decisões</h2>
+        <SectionTitle>Decisões</SectionTitle>
         {decided.length === 0 && (
           <div className="text-sm text-gray-500">Sem decisões ainda.</div>
         )}
         {decided.map(a => (
           <div key={a.id} className="py-2 text-sm">
-            <span className="font-medium">{a.titulo}</span> — {a.status} em {a.decidedAt}
+            <span className="font-medium">{a.titulo}</span> — {a.status} em {new Date(a.decidedAt!).toLocaleString()}
           </div>
         ))}
       </Card>
