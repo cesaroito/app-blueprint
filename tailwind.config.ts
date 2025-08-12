@@ -61,12 +61,23 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				brand: {
+					primary: 'var(--brand-primary)',
+					secondary: 'var(--brand-secondary)',
+					accent: 'var(--brand-accent)',
+					muted: 'var(--brand-muted)',
+					foreground: 'var(--brand-foreground)'
+				},
+				success: 'var(--success)',
+				warning: 'var(--warning)',
+				danger: 'var(--danger)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				'2xl': '1.25rem'
 			},
 			keyframes: {
 				'accordion-down': {
