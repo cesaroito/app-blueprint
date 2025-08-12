@@ -10,13 +10,17 @@ import tipsJson from '../../data/tips.json'
 import eventsJson from '../../data/events.json'
 import catalogJson from '../../data/catalog.json'
 import { ruleWeatherAdjust, ruleQueueMitigation, ruleTrainStrike } from './rules'
+import { determineIntent, nlgReply } from './nlg'
+import { parseSlash } from './chat'
 
 export type Phase = 'N-90' | 'N-60' | 'N-30' | 'DIA1' | 'DIA3' | 'POS'
+export type ChatMessage = { id: string; role: 'user'|'assistant'; text: string; ts: string }
 interface JamesState {
   now: string; phase: Phase;
   users: User[]; trips: Trip[]; itinerary: ItineraryItem[]; checklists: ChecklistItem[]; tips: Tip[]; events: DemoEvent[]; catalog: Catalog;
-  actions: ActionProposal[]; logs: { id: string; text: string; at: string }[];
+  actions: ActionProposal[]; logs: { id: string; text: string; at: string }[]; chat: ChatMessage[];
   fireEventById: (id: string) => void; approveAction: (id: string, consultantId: string) => void; rejectAction: (id: string, consultantId: string) => void;
+  askJames: (text: string) => void; addMessage: (m: ChatMessage) => void;
   moveToPhase: (p: Phase) => void; reset: () => void
 }
 
@@ -26,7 +30,36 @@ const baseData = { users: usersJson as User[], trips: tripsJson as Trip[], itine
 export const useJamesStore = create<JamesState>()(
   persist(
     (set, get) => ({
-      now: initialNow, phase: 'N-90', ...baseData, actions: [], logs: [],
+      now: initialNow, phase: 'N-90', ...baseData, actions: [], logs: [], chat: [],
+      addMessage: (m) => set({ chat: [...get().chat, m] }),
+      askJames: (text) => {
+        const s = get()
+        // Slash commands disparam eventos
+        const { eventId } = parseSlash(text)
+        if (eventId) s.fireEventById(eventId)
+
+        const userMsg: ChatMessage = { id: `u_${Date.now()}`, role: 'user', text, ts: new Date().toISOString() }
+        const typing: ChatMessage = { id: `t_${Date.now()}`, role: 'assistant', text: 'Digitando…', ts: new Date().toISOString() }
+        set({ chat: [...s.chat, userMsg, typing] })
+
+        // Contexto mínimo p/ NLG
+        const next = s.itinerary.find(i => i.quando >= s.now)
+        const ctx = {
+          phase: s.phase,
+          nextTitle: next?.titulo,
+          nextTime: next ? new Date(next.quando).toLocaleTimeString() : undefined,
+          hasPendingAction: s.actions.some(a => a.status === 'proposta'),
+          city: 'Roma'
+        }
+        const intent = determineIntent(text)
+        const reply = nlgReply(intent, ctx)
+
+        setTimeout(() => {
+          const after = get().chat.filter(m => m.id !== typing.id)
+          const bot: ChatMessage = { id: `a_${Date.now()}`, role: 'assistant', text: reply, ts: new Date().toISOString() }
+          set({ chat: [...after, bot] })
+        }, 500)
+      },
       fireEventById: (id) => {
         const s = get(); const ev = s.events.find(e => e.id === id); if (!ev) return
         const proposals = [
