@@ -1,73 +1,41 @@
-# Welcome to your Lovable project
+# James Demo (Vite + React + Tailwind)
 
-## Project info
+Pequena demo local, sem chamadas externas, com dados estáticos em `data/` e estado global via Zustand (persistido em `localStorage`).
 
-**URL**: https://lovable.dev/projects/4b9f7ccd-aa1a-433b-845a-ddb948df5c48
+## Como rodar
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/4b9f7ccd-aa1a-433b-845a-ddb948df5c48) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm i && npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Abra o navegador no endereço indicado (por padrão http://localhost:8080).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Estrutura
+- Dados locais: `data/*.json`
+- Store/persistência: `src/lib/store.ts` (Zustand + `name: 'james_demo_state_v1'`)
+- Regras puras: `src/lib/rules.ts`
+- Páginas:
+  - Viajante: `/traveler`
+  - Consultor: `/consultant`
+  - Console de Demo: `/demo`
+- Layout com header e navegação: aplicado a todas as rotas
 
-**Use GitHub Codespaces**
+## Fluxo da demo
+1) Vá para `/demo` e use a “Linha do tempo”:
+   - Clique em `N-90` → `N-60` → `N-30` (apenas para simular a evolução).
+2) Ainda em `/demo`, na seção “Cenários”:
+   - Dispare “Chuva leve 30m”.
+3) Abra `/consultant`:
+   - Aprove a proposta recém gerada.
+4) Volte para `/demo`:
+   - Dispare “Fila alta Vaticano” e depois “Greve parcial (trem)”.
+5) Vá para `/consultant` e aprove ambas.
+6) Volte ao `/traveler`:
+   - Veja o slogan, as ações aplicadas (“Confirmado” quando aprovadas), o itinerário e o checklist.
+7) Em `/demo`, use “Reset Demo” para restaurar o estado inicial (equivalente a `store.reset`).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Observações
+- Botões principais usam as cores de marca (`brand.primary` e `brand.secondary`).
+- Não há chamadas de rede externas; todos os dados vêm de imports estáticos.
+- As páginas `/traveler`, `/consultant` e `/demo` carregam sem erros.
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/4b9f7ccd-aa1a-433b-845a-ddb948df5c48) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
