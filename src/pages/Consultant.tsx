@@ -1,6 +1,8 @@
 'use client'
 import { useJamesStore } from '@/lib/store'
 import { Card, Button } from '@/components/ui'
+import { Tour } from '@/components/Tour'
+import { tourStepsConsultant } from '@/lib/tour'
 
 export default function Consultant() {
   const { actions, approveAction, rejectAction, users } = useJamesStore()
@@ -42,6 +44,8 @@ export default function Consultant() {
           </div>
         ))}
       </Card>
+
+      <Tour steps={tourStepsConsultant} />
     </div>
   )
 }

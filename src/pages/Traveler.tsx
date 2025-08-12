@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import { useJamesStore } from '@/lib/store'
 import { Card, Button, Pill } from '@/components/ui'
 import { copy } from '@/lib/copy'
+import { Tour } from '@/components/Tour'
+import { tourStepsTraveler } from '@/lib/tour'
 
 export default function Traveler() {
   const { trips, itinerary, checklists, actions, phase } = useJamesStore()
@@ -67,6 +69,8 @@ export default function Traveler() {
           ))}
         </ul>
       </Card>
+
+      <Tour steps={tourStepsTraveler} />
     </div>
   )
 }
