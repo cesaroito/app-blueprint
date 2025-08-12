@@ -20,6 +20,7 @@ const RootLayout = () => {
       "/demo": "Interactive Demo | Demo App",
       "/album": "Album | Demo App",
       "/metrics": "Metrics | Demo App",
+      "/chat": "Chat | Demo App",
     };
     document.title = map[location.pathname] || "Demo App";
   }, [location.pathname]);
