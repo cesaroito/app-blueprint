@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader'
 import Callout from '@/components/Callout'
+import { motion, AnimatePresence } from 'framer-motion'
 import { imageForItinerary } from '@/lib/images';
 import { useJamesStore } from "@/lib/store";
 import { Card, Button, Pill, SectionTitle } from "@/components/ui";
@@ -82,15 +83,25 @@ const Present: React.FC = () => {
           ) : (
             <>
               <ul className="text-sm">
-                {actions.map((a: any) => (
-                  <li key={a.id} className="py-2 border-b last:border-none flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">{a.titulo}</div>
-                      <div className="text-gray-600">{a.justificativa}</div>
-                    </div>
-                    <Pill>{a.status ?? "proposta"}</Pill>
-                  </li>
-                ))}
+                <AnimatePresence>
+                  {actions.map((a: any) => (
+                    <motion.li
+                      key={a.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25 }}
+                      className="py-2 border-b last:border-none flex items-center justify-between"
+                      layout
+                    >
+                      <div>
+                        <div className="font-medium">{a.titulo}</div>
+                        <div className="text-gray-600">{a.justificativa}</div>
+                      </div>
+                      <Pill>{a.status ?? "proposta"}</Pill>
+                    </motion.li>
+                  ))}
+                </AnimatePresence>
               </ul>
               <div className="mt-3">
                 <Callout>Mostre aqui como a ação aparece primeiro como proposta e só é aplicada após aprovação.</Callout>
@@ -102,18 +113,28 @@ const Present: React.FC = () => {
         <Card>
           <SectionTitle>Itinerário (resumo)</SectionTitle>
           <ul className="text-sm grid md:grid-cols-2 gap-2">
-            {itinerary.slice(0, 4).map((i: any, idx: number) => (
-              <li key={i.id} className="p-2 rounded-lg bg-brand-muted">
-                {(() => {
-                  const src = imageForItinerary(i.titulo)
-                  return src ? <img src={src} alt={i.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
-                })()}
-                <div className="font-medium">{i.titulo}</div>
-                <div className="text-xs text-gray-600">
-                  {new Date(i.quando).toLocaleString()} — {i.local}
-                </div>
-              </li>
-            ))}
+            <AnimatePresence>
+              {itinerary.slice(0, 4).map((i: any, idx: number) => (
+                <motion.li
+                  key={i.id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.2 }}
+                  className="p-2 rounded-lg bg-brand-muted"
+                  layout
+                >
+                  {(() => {
+                    const src = imageForItinerary(i.titulo)
+                    return src ? <img src={src} alt={i.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
+                  })()}
+                  <div className="font-medium">{i.titulo}</div>
+                  <div className="text-xs text-gray-600">
+                    {new Date(i.quando).toLocaleString()} — {i.local}
+                  </div>
+                </motion.li>
+              ))}
+            </AnimatePresence>
           </ul>
         </Card>
       </main>

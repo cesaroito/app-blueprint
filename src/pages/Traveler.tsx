@@ -7,6 +7,7 @@ import { copy } from '@/lib/copy'
 import { Tour } from '@/components/Tour'
 import { tourStepsTraveler } from '@/lib/tour'
 import { imageForTip } from '@/lib/images'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Traveler() {
   const { trips, itinerary, checklists, actions, phase, tips } = useJamesStore()
@@ -30,36 +31,56 @@ export default function Traveler() {
       <Card className="bg-white/90 backdrop-blur">
         <h3 className="h-2 mb-2">Ações do James</h3>
         <ul className="space-y-2">
-          {openActions.map(a => (
-            <li key={a.id} className="p-3 rounded-xl border">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="font-medium">{a.titulo}</div>
-                  <div className="text-sm text-gray-600">{a.justificativa}</div>
-                  <div className="text-xs text-gray-500 mt-1">{copy.labels.explainWhy}</div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Status: {a.status === 'aprovada' ? 'Aprovada pelo consultor' : 'Aguardando aprovação'}
+          <AnimatePresence>
+            {openActions.map(a => (
+              <motion.li
+                key={a.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+                className="p-3 rounded-xl border"
+                layout
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="font-medium">{a.titulo}</div>
+                    <div className="text-sm text-gray-600">{a.justificativa}</div>
+                    <div className="text-xs text-gray-500 mt-1">{copy.labels.explainWhy}</div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      Status: {a.status === 'aprovada' ? 'Aprovada pelo consultor' : 'Aguardando aprovação'}
+                    </div>
                   </div>
+                  <Button disabled variant={a.status === 'aprovada' ? 'secondary' : 'primary'}>
+                    {a.status === 'aprovada' ? 'Confirmado' : 'Pendente'}
+                  </Button>
                 </div>
-                <Button disabled variant={a.status === 'aprovada' ? 'secondary' : 'primary'}>
-                  {a.status === 'aprovada' ? 'Confirmado' : 'Pendente'}
-                </Button>
-              </div>
-            </li>
-          ))}
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </ul>
       </Card>
 
       <Card className="bg-white/90 backdrop-blur">
         <h3 className="font-semibold mb-2">Itinerário</h3>
         <ul className="text-sm">
-          {itinerary.map(i => (
-            <li key={i.id} className="py-1 border-b last:border-none">
-              <span className="font-medium">{i.titulo}</span>
-              <span className="text-gray-600"> — {new Date(i.quando).toLocaleString()}</span>
-              <div className="text-xs text-gray-500">{i.local}</div>
-            </li>
-          ))}
+          <AnimatePresence>
+            {itinerary.map(i => (
+              <motion.li
+                key={i.id}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.2 }}
+                className="py-1 border-b last:border-none"
+                layout
+              >
+                <span className="font-medium">{i.titulo}</span>
+                <span className="text-gray-600"> — {new Date(i.quando).toLocaleString()}</span>
+                <div className="text-xs text-gray-500">{i.local}</div>
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </ul>
       </Card>
 
