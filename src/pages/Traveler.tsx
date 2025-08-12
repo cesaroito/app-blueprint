@@ -21,14 +21,13 @@ export default function Traveler() {
   return (
       <div className="space-y-4">
       <div className="rounded-2xl p-6 mb-4 text-brand-foreground" style={{background:'var(--brand-gradient)'}}>
-        <img src={IMG.hero} alt="Roma" className="w-full h-48 object-cover rounded-xl mb-3 opacity-95" />
-        <div className="text-sm opacity-90">Concierge proativo, tecnologia discreta.</div>
-      </div>
-      <div className="rounded-2xl p-6 mb-4 text-brand-foreground" style={{background:'var(--brand-gradient)'}}>
+        <img src={IMG.hero} alt="Roma – capa da viagem" loading="lazy" className="w-full h-48 object-cover rounded-xl mb-3 opacity-95" />
         <h1 className="text-2xl font-semibold">{copy.slogan}</h1>
-        <div className="mt-2"><a href="/chat"><Button variant="secondary">Abrir chat</Button></a></div>
-        <div className="text-sm opacity-90 mt-1">Assistente proativo, tecnologia discreta.</div>
-        <div className="mt-2"><Pill>{trip?.titulo} — {phase}</Pill></div>
+        <div className="mt-2 flex items-center gap-2">
+          <a href="/chat"><Button variant="secondary">Abrir chat</Button></a>
+          <Pill>{trip?.titulo} — {phase}</Pill>
+        </div>
+        <div className="text-sm opacity-90 mt-1">Concierge proativo, tecnologia discreta.</div>
       </div>
 
       {openActions.map(a => (
@@ -81,7 +80,7 @@ export default function Traveler() {
             <li key={t.id} className="p-2 rounded-xl bg-brand-muted">
               {(() => {
                 const src = imageForTip(t.tag, t.titulo)
-                return src ? <img src={src} alt={t.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
+                return src ? <img src={src} alt={t.titulo} loading="lazy" className="h-24 w-full object-cover rounded-lg mb-2" /> : null
               })()}
               <div className="font-medium">{t.titulo}</div>
               <div className="text-xs text-gray-600">{t.texto}</div>

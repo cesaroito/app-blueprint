@@ -11,7 +11,7 @@ export default function Album(){
       <Card>
         <SectionTitle>Galeria</SectionTitle>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {fotos.map((src,i)=>(<img key={i} src={src} alt={`foto ${i+1}`} className="w-full h-40 object-cover rounded-xl" />))}
+          {fotos.map((src,i)=>(<img key={i} src={src} alt={`foto ${i+1}`} loading="lazy" onError={(e)=>{(e.currentTarget as HTMLImageElement).src='/placeholder.svg'}} className="w-full h-40 object-cover rounded-xl" />))}
         </div>
       </Card>
       <Card>
