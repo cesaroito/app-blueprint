@@ -1,6 +1,6 @@
 'use client'
 import { useJamesStore } from '@/lib/store'
-import { Card, Button } from '@/components/ui'
+import { Card, Button, Pill } from '@/components/ui'
 
 const buttons = [
   { id: 'ev_weather_light_drizzle', label: 'Chuva leve 30m' },
@@ -54,7 +54,10 @@ export default function Demo() {
               {p}
             </Button>
           ))}
-          <Button onClick={handleAutoPlay} variant="secondary">Auto-play Roma (3min)</Button>
+          <div className="flex items-center gap-2">
+            <Button onClick={handleAutoPlay} variant="secondary">Auto-play Roma</Button>
+            <Pill>~3 min</Pill>
+          </div>
           <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
         </div>
       </Card>
