@@ -1,1 +1,10 @@
-:root{--brand-primary:#FFD400;--brand-secondary:#0033A1;--brand-accent:#0EAD69;--brand-muted:#F5F7FA;--brand-foreground:#0F172A;--success:#16A34A;--warning:#F59E0B;--danger:#DC2626}
+:root{
+ --brand-primary:#FFD400;--brand-secondary:#0033A1;--brand-accent:#0EAD69;
+ --brand-muted:#F5F7FA;--brand-foreground:#0F172A;
+ --success:#16A34A;--warning:#F59E0B;--danger:#DC2626;
+ --brand-gradient: linear-gradient(135deg,#FFD400 0%,#FFC200 30%,#0033A1 100%);
+ --card-shadow: 0 10px 25px rgba(0,0,0,.06);
+ --ring: 0 0 0 3px rgba(0,51,161,.2);
+}
+.btn:focus-visible{outline:none;box-shadow:var(--ring)}
+.card{box-shadow:var(--card-shadow)}
