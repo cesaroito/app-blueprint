@@ -1,5 +1,6 @@
 import React from 'react';
-import { IMG, imageForItinerary } from '@/lib/images';
+import PageHeader from '@/components/PageHeader'
+import { imageForItinerary } from '@/lib/images';
 import { useJamesStore } from "@/lib/store";
 import { Card, Button, Pill, SectionTitle } from "@/components/ui";
 
@@ -25,6 +26,15 @@ const steps = [
   },
 ] as const;
 
+const notes = [
+  'N-90: checklists críticos (vacina, seguro) criados automaticamente.',
+  'N-60: reserva especial sugerida com base em preferências.',
+  'N-30: mala e documentos — status verde.',
+  'Dia 1 com chuva: troca para Borghese + ingresso sem fila.',
+  'Fila Vaticana: remarcação inteligente com fast track.',
+  'Dia 3: greve do trem → Italo 10h10 + transfer.'
+]
+
 const Present: React.FC = () => {
   const s = useJamesStore();
   const { trips, itinerary, actions, phase } = s;
@@ -44,22 +54,8 @@ const Present: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-brand-muted text-brand-foreground">
-      <div
-        className="rounded-none md:rounded-2xl p-8 mb-6 text-brand-foreground"
-        style={{ background: "var(--brand-gradient)" }}
-      >
-        <div className="container mx-auto">
-          <img src={IMG.hero} alt="Roma" className="w-full h-56 object-cover rounded-xl mb-4 opacity-90" />
-          <h1 className="text-3xl md:text-4xl font-bold drop-shadow">Viaje leve. O James cuida.</h1>
-          <div className="mt-2 opacity-90">Concierge proativo, tecnologia discreta.</div>
-          {trip && (
-            <div className="mt-3">
-              <Pill>
-                {trip.titulo} — {phase}
-              </Pill>
-            </div>
-          )}
-        </div>
+      <div className="container mx-auto mb-6">
+        <PageHeader title="Apresentação guiada" subtitle="Mostre o valor em 6 passos. Use Próximo para avançar." cta={<Pill>{phase}</Pill>} />
       </div>
 
       <main className="container mx-auto pb-10">
@@ -75,6 +71,7 @@ const Present: React.FC = () => {
               Próximo
             </Button>
           </div>
+          <div className="text-sm text-gray-700 p-3 rounded-xl bg-brand-muted">{notes[idx]}</div>
         </Card>
 
         <Card>
