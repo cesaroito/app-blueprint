@@ -1,0 +1,7 @@
+[
+ {"id":"t1","titulo":"Roma – Dolce Vita","viajantes":["u1","u2"],
+  "janela":{"inicio":"2025-10-10","fim":"2025-10-17"},
+  "status":"planejada","destino":"Roma, IT",
+  "hotel":{"nome":"Hotel Artemide","endereco":"Via Nazionale, 22"},
+  "preferencias":{"gastronomia":true,"arte":true,"evitarFilas":true}}
+]
