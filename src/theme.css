@@ -1,3 +1,6 @@
+@font-face{font-family:'InterVar';src:url('/fonts/Inter-Variable.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'CalSans';src:url('/fonts/CalSans-SemiBold.ttf') format('truetype');font-display:swap}
+
 :root{
  --brand-primary:#FFD400;--brand-secondary:#0033A1;--brand-accent:#0EAD69;
  --brand-muted:#F5F7FA;--brand-foreground:#0F172A;
@@ -5,6 +8,23 @@
  --brand-gradient: linear-gradient(135deg,#FFD400 0%,#FFC200 30%,#0033A1 100%);
  --card-shadow: 0 10px 25px rgba(0,0,0,.06);
  --ring: 0 0 0 3px rgba(0,51,161,.2);
+ 
+ /* Typography tokens */
+ --font-sans:'InterVar',ui-sans-serif,system-ui;
+ --font-display:'CalSans','InterVar',ui-sans-serif,system-ui;
+ --fs-hero: clamp(28px, 4.5vw, 44px);
+ --fs-h1: clamp(22px, 3.2vw, 32px);
+ --fs-h2: clamp(18px, 2.4vw, 24px);
+ --radius-xxl: 1.5rem;
+ --shadow-lg: 0 20px 40px rgba(0,0,0,.08);
 }
+
 .btn:focus-visible{outline:none;box-shadow:var(--ring)}
 .card{box-shadow:var(--card-shadow)}
+
+html,body{font-family:var(--font-sans)}
+.h-display{font-family:var(--font-display);font-size:var(--fs-hero);line-height:1.05}
+.h-1{font-family:var(--font-display);font-size:var(--fs-h1)}
+.h-2{font-weight:600;font-size:var(--fs-h2)}
+.rounded-xxl{border-radius:var(--radius-xxl)}
+.shadow-elev{box-shadow:var(--shadow-lg)}
