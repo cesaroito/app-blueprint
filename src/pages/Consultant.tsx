@@ -3,6 +3,7 @@ import { useJamesStore } from '@/lib/store'
 import { Card, Button, SectionTitle } from '@/components/ui'
 import { Tour } from '@/components/Tour'
 import { tourStepsConsultant } from '@/lib/tour'
+import { toast } from 'sonner'
 
 export default function Consultant() {
   const { actions, approveAction, rejectAction, users } = useJamesStore()
@@ -29,8 +30,8 @@ export default function Consultant() {
               <div className="text-sm text-gray-600">{a.justificativa}</div>
             </div>
             <div className="flex gap-3">
-              <Button variant="secondary" onClick={() => approveAction(a.id, me.id)}>Aprovar</Button>
-              <Button variant="secondary" onClick={() => rejectAction(a.id, me.id)} className="bg-danger text-white">Rejeitar</Button>
+              <Button variant="secondary" onClick={() => { approveAction(a.id, me.id); toast.success('Ação aprovada'); }}>Aprovar</Button>
+              <Button variant="secondary" onClick={() => { rejectAction(a.id, me.id); toast.error('Ação rejeitada'); }} className="bg-danger text-white">Rejeitar</Button>
             </div>
           </div>
         ))}
