@@ -18,6 +18,8 @@ const RootLayout = () => {
       "/traveler": "Traveler | Demo App",
       "/consultant": "Consultant | Demo App",
       "/demo": "Interactive Demo | Demo App",
+      "/album": "Album | Demo App",
+      "/metrics": "Metrics | Demo App",
     };
     document.title = map[location.pathname] || "Demo App";
   }, [location.pathname]);

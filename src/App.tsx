@@ -11,6 +11,7 @@ import Demo from "./pages/Demo";
 import NotFound from "./pages/NotFound";
 import Present from "./pages/Present";
 import Album from "./pages/Album";
+import Metrics from "./pages/Metrics";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/consultant" element={<Consultant />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/album" element={<Album />} />
+            <Route path="/metrics" element={<Metrics />} />
           </Route>
           <Route path="/present" element={<Present />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
