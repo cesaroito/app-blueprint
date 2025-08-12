@@ -1,28 +1,25 @@
 'use client'
-import type { ReactNode, ButtonHTMLAttributes } from 'react'
+import { ReactNode } from 'react'
 
-export function Card({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-2xl bg-card text-card-foreground border shadow p-4 mb-3">
-      {children}
-    </div>
-  )
+export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <div className={`rounded-2xl bg-white card p-5 mb-4 ${className}`}>{children}</div>
 }
 
-export function Button(props: ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { className = '', ...rest } = props
-  return (
-    <button
-      {...rest}
-      className={`px-4 py-2 rounded-2xl font-medium ${className}`}
-    />
-  )
+type BtnProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'ghost' }
+export function Button({ variant = 'primary', className = '', ...rest }: BtnProps) {
+  const base = 'btn px-4 py-2 rounded-2xl font-medium transition'
+  const styles = {
+    primary: 'bg-brand-primary text-brand-foreground hover:brightness-95',
+    secondary: 'bg-brand-secondary text-white hover:brightness-110',
+    ghost: 'bg-white border hover:bg-brand-muted',
+  }[variant]
+  return <button {...rest} className={`${base} ${styles} ${className}`} />
 }
 
 export function Pill({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-brand-muted">
-      {children}
-    </span>
-  )
+  return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-brand-muted">{children}</span>
+}
+
+export function SectionTitle({ children }: { children: ReactNode }) {
+  return <h2 className="text-lg font-semibold mb-2">{children}</h2>
 }
