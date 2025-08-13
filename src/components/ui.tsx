@@ -2,7 +2,11 @@
 import { ReactNode } from 'react'
 
 export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-2xl bg-white card p-5 mb-4 ${className}`}>{children}</div>
+  return <div className={`bg-white/95 backdrop-blur shadow-elev rounded-2xl p-5 ${className}`}>{children}</div>
+}
+
+export function Badge({children}:{children:React.ReactNode}){
+  return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] bg-brand-secondary/10 text-brand-secondary">{children}</span>
 }
 
 type BtnProps = React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'ghost' }
