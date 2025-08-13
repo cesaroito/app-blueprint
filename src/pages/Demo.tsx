@@ -70,8 +70,8 @@ export default function Demo() {
             <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
           </div>
           
-          <div className="text-sm text-gray-600 mt-3">
-            <a href="/consultant" className="text-brand-primary hover:underline">Abrir Consultor</a> • <a href="/present" className="text-brand-primary hover:underline">Abrir Apresentação</a>
+          <div className="mt-2 text-sm text-gray-600">
+            <a href="/consultant" className="underline">Abrir Consultor</a> · <a href="/present" className="underline">Abrir Apresentação</a>
           </div>
         </Card>
       </section>
