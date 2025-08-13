@@ -16,7 +16,7 @@ import { parseSlash } from './chat'
 export type Phase = 'N-90' | 'N-60' | 'N-30' | 'DIA1' | 'DIA3' | 'POS'
 export type ChatMessage = { id: string; role: 'user'|'assistant'; text: string; ts: string }
 interface JamesState {
-  now: string; phase: Phase;
+  now: string; phase: Phase; autoApprove: boolean;
   users: User[]; trips: Trip[]; itinerary: ItineraryItem[]; checklists: ChecklistItem[]; tips: Tip[]; events: DemoEvent[]; catalog: Catalog;
   actions: ActionProposal[]; logs: { id: string; text: string; at: string }[]; chat: ChatMessage[];
   fireEventById: (id: string) => void; approveAction: (id: string, consultantId: string) => void; rejectAction: (id: string, consultantId: string) => void;
@@ -30,7 +30,7 @@ const baseData = { users: usersJson as User[], trips: tripsJson as Trip[], itine
 export const useJamesStore = create<JamesState>()(
   persist(
     (set, get) => ({
-      now: initialNow, phase: 'N-90', ...baseData, actions: [], logs: [], chat: [{ id:'a_welcome', role:'assistant', text:'Olá! Estou aqui para garantir uma viagem leve. Pergunte pelo **plano de hoje** ou use /chuva, /fila, /greve.', ts: new Date().toISOString() }],
+      now: initialNow, phase: 'N-90', autoApprove: false, ...baseData, actions: [], logs: [], chat: [{ id:'a_welcome', role:'assistant', text:'Olá! Estou aqui para garantir uma viagem leve. Pergunte pelo **plano de hoje** ou use /chuva, /fila, /greve.', ts: new Date().toISOString() }],
       addMessage: (m) => set({ chat: [...get().chat, m] }),
       askJames: (text) => {
         const s = get()
@@ -62,11 +62,22 @@ export const useJamesStore = create<JamesState>()(
       },
       fireEventById: (id) => {
         const s = get(); const ev = s.events.find(e => e.id === id); if (!ev) return
-        const proposals = [
+        let proposals = [
           ...ruleWeatherAdjust(ev, s.itinerary, s.catalog),
           ...ruleQueueMitigation(ev),
           ...ruleTrainStrike(ev, s.catalog)
         ]
+        
+        // Auto-approve if enabled
+        if (s.autoApprove) {
+          proposals = proposals.map(p => ({
+            ...p,
+            status: 'aprovada' as const,
+            decidedBy: 'auto-system',
+            decidedAt: new Date().toISOString()
+          }))
+        }
+        
         set({
           actions: [...s.actions, ...proposals],
           logs: [...s.logs, { id: `log_${id}`, text: `Evento ${id} aplicado`, at: new Date().toISOString() }]
@@ -91,7 +102,7 @@ export const useJamesStore = create<JamesState>()(
         }
         set({ phase: p, now: map[p] })
       },
-      reset: () => set({ ...baseData, actions: [], logs: [], phase: 'N-90', now: initialNow })
+      reset: () => set({ ...baseData, actions: [], logs: [], phase: 'N-90', now: initialNow, autoApprove: false })
     }),
     { name: 'james_demo_state_v1' }
   )

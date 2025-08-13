@@ -7,6 +7,8 @@ import { useJamesStore } from "@/lib/store";
 import { Card, Button, Pill, SectionTitle } from "@/components/ui";
 
 
+const stepsNav = ['N-90','N-60','N-30','Dia 1: Chuva','Fila Vaticano','Dia 3: Greve Trem']
+
 const steps = [
   { name: "Pré-embarque N-90", run: (s: any) => s.moveToPhase("N-90") },
   { name: "N-60", run: (s: any) => s.moveToPhase("N-60") },
@@ -57,16 +59,27 @@ const Present: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-muted text-brand-foreground">
       <div className="container mx-auto mb-6">
-        <PageHeader title="Apresentação guiada" subtitle="Mostre o valor em 6 passos. Use Próximo para avançar." cta={<Pill>{phase}</Pill>} />
+        <PageHeader 
+          title="Apresentação guiada" 
+          subtitle="Mostre o valor em 6 passos. Use Próximo para avançar." 
+          cta={<div className="flex items-center gap-4">
+            <Pill>{phase}</Pill>
+            <label className="text-sm flex items-center gap-2">
+              <input type="checkbox" onChange={e=>useJamesStore.setState({autoApprove:e.target.checked})}/>
+              Aprovação automática
+            </label>
+          </div>} 
+        />
       </div>
 
       <main className="container mx-auto pb-10">
         <Card>
           <SectionTitle>Roteiro</SectionTitle>
           <div className="flex flex-wrap gap-2">
-            {steps.map((st, i) => (
-              <Button key={st.name} onClick={() => setIdx(i)} variant={i === idx ? "secondary" : "ghost"}>
-                {i + 1}. {st.name}
+            {stepsNav.map((st, i) => (
+              <Button key={st} onClick={() => setIdx(i)} variant={i === idx ? "secondary" : "ghost"}>
+                <span className="mr-2 rounded-full w-6 h-6 grid place-items-center bg-brand-secondary text-white text-xs">{i+1}</span>
+                {st}
               </Button>
             ))}
             <Button onClick={() => setIdx(Math.min(idx + 1, steps.length - 1))} className="ml-auto">
