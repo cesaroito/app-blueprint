@@ -19,7 +19,7 @@ export default function Stage(){
       <div className="absolute inset-0 mesh-bg" style={{ opacity: .25 }}/>
       <div className="relative h-full mx-auto max-w-5xl p-6 flex flex-col">
         <div className="flex items-center gap-3 mb-4">
-          <h1 className="text-white h-display font-bold drop-shadow">James • Palco</h1>
+          <h1 className="text-white text-4xl font-bold drop-shadow mb-3">James • Palco</h1>
           <Pill>{phase}</Pill>
           <div className="ml-auto flex gap-2">
             <Button className="bg-white/90" onClick={()=>askJames('Qual o plano para hoje?')}>Plano</Button>
