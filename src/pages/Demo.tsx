@@ -33,44 +33,48 @@ export default function Demo() {
         </label>
       </div>
 
-      <Card>
-        <h2 className="font-semibold mb-2">Cenários</h2>
-        <div className="flex flex-wrap gap-2">
-          {buttons.map(b => (
-            <Button
-              key={b.id}
-              onClick={() => fireEventById(b.id)}
-              className="bg-brand-primary text-brand-foreground"
-            >
-              {b.label}
-            </Button>
-          ))}
-        </div>
-      </Card>
-
-      <Card>
-        <h2 className="font-semibold mb-2">Linha do tempo</h2>
-        <div className="flex items-center gap-2">
-          {phases.map(p => (
-            <Button
-              key={p}
-              onClick={() => moveToPhase(p)}
-              className={`${p === phase ? 'bg-brand-secondary text-white' : 'bg-white border'}`}
-            >
-              {p}
-            </Button>
-          ))}
-          <div className="flex items-center gap-2">
-            <Button onClick={handleAutoPlay} variant="secondary">Auto-play Roma</Button>
-            <Pill>~3 min</Pill>
+      <section className="section">
+        <Card>
+          <h3 className="h-2">Cenários</h3>
+          <div className="flex flex-wrap gap-2">
+            {buttons.map(b => (
+              <Button
+                key={b.id}
+                onClick={() => fireEventById(b.id)}
+                className="bg-brand-primary text-brand-foreground"
+              >
+                {b.label}
+              </Button>
+            ))}
           </div>
-          <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
-        </div>
-        
-        <div className="text-sm text-gray-600 mt-3">
-          <a href="/consultant" className="text-brand-primary hover:underline">Abrir Consultor</a> • <a href="/present" className="text-brand-primary hover:underline">Abrir Apresentação</a>
-        </div>
-      </Card>
+        </Card>
+      </section>
+
+      <section className="section">
+        <Card>
+          <h3 className="h-2">Linha do tempo</h3>
+          <div className="flex items-center gap-2">
+            {phases.map(p => (
+              <Button
+                key={p}
+                onClick={() => moveToPhase(p)}
+                className={`${p === phase ? 'bg-brand-secondary text-white' : 'bg-white border'}`}
+              >
+                {p}
+              </Button>
+            ))}
+            <div className="flex items-center gap-2">
+              <Button onClick={handleAutoPlay} variant="secondary">Auto-play Roma</Button>
+              <Pill>~3 min</Pill>
+            </div>
+            <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
+          </div>
+          
+          <div className="text-sm text-gray-600 mt-3">
+            <a href="/consultant" className="text-brand-primary hover:underline">Abrir Consultor</a> • <a href="/present" className="text-brand-primary hover:underline">Abrir Apresentação</a>
+          </div>
+        </Card>
+      </section>
     </div>
   )
 }

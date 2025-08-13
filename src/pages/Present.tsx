@@ -4,8 +4,7 @@ import Callout from '@/components/Callout'
 import { motion, AnimatePresence } from 'framer-motion'
 import { imageForItinerary } from '@/lib/images';
 import { useJamesStore } from "@/lib/store";
-import { Card, Button, Pill, SectionTitle } from "@/components/ui";
-
+import { Card, Button, Pill } from "@/components/ui";
 
 const stepsNav = ['N-90','N-60','N-30','Dia 1: Chuva','Fila Vaticano','Dia 3: Greve Trem']
 
@@ -73,83 +72,89 @@ const Present: React.FC = () => {
       </div>
 
       <main className="container mx-auto pb-10">
-        <Card>
-          <SectionTitle>Roteiro</SectionTitle>
-          <div className="flex flex-wrap gap-2">
-            {stepsNav.map((st, i) => (
-              <Button key={st} onClick={() => setIdx(i)} variant={i === idx ? "secondary" : "ghost"}>
-                <span className="mr-2 rounded-full w-6 h-6 grid place-items-center bg-brand-secondary text-white text-xs">{i+1}</span>
-                {st}
-              </Button>
-            ))}
-            <Button onClick={() => setIdx(Math.min(idx + 1, steps.length - 1))} className="ml-auto">
-              Próximo
-            </Button>
-          </div>
-          <div className="text-sm text-gray-700 p-3 rounded-xl bg-brand-muted">{notes[idx]}</div>
-        </Card>
-
-        <Card>
-          <SectionTitle>Ações do James</SectionTitle>
-          {actions.length === 0 ? (
-            <div className="text-sm text-gray-600">Sem ações no momento.</div>
-          ) : (
-            <>
-              <ul className="text-sm">
-                <AnimatePresence>
-                  {actions.map((a: any) => (
-                    <motion.li
-                      key={a.id}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.25 }}
-                      className="py-2 border-b last:border-none flex items-center justify-between"
-                      layout
-                    >
-                      <div>
-                        <div className="font-medium">{a.titulo}</div>
-                        <div className="text-gray-600">{a.justificativa}</div>
-                      </div>
-                      <Pill>{a.status ?? "proposta"}</Pill>
-                    </motion.li>
-                  ))}
-                </AnimatePresence>
-              </ul>
-              <div className="mt-3">
-                <Callout>Mostre aqui como a ação aparece primeiro como proposta e só é aplicada após aprovação.</Callout>
-              </div>
-            </>
-          )}
-        </Card>
-
-        <Card>
-          <SectionTitle>Itinerário (resumo)</SectionTitle>
-          <ul className="text-sm grid md:grid-cols-2 gap-2">
-            <AnimatePresence>
-              {itinerary.slice(0, 4).map((i: any, idx: number) => (
-                <motion.li
-                  key={i.id}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2 }}
-                  className="p-2 rounded-lg bg-brand-muted"
-                  layout
-                >
-                  {(() => {
-                    const src = imageForItinerary(i.titulo)
-                    return src ? <img src={src} alt={i.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
-                  })()}
-                  <div className="font-medium">{i.titulo}</div>
-                  <div className="text-xs text-gray-600">
-                    {new Date(i.quando).toLocaleString()} — {i.local}
-                  </div>
-                </motion.li>
+        <section className="section">
+          <Card>
+            <h3 className="h-2">Roteiro</h3>
+            <div className="flex flex-wrap gap-2">
+              {stepsNav.map((st, i) => (
+                <Button key={st} onClick={() => setIdx(i)} variant={i === idx ? "secondary" : "ghost"}>
+                  <span className="mr-2 rounded-full w-6 h-6 grid place-items-center bg-brand-secondary text-white text-xs">{i+1}</span>
+                  {st}
+                </Button>
               ))}
-            </AnimatePresence>
-          </ul>
-        </Card>
+              <Button onClick={() => setIdx(Math.min(idx + 1, steps.length - 1))} className="ml-auto">
+                Próximo
+              </Button>
+            </div>
+            <div className="text-sm text-gray-700 p-3 rounded-xl bg-brand-muted">{notes[idx]}</div>
+          </Card>
+        </section>
+
+        <section className="section">
+          <Card>
+            <h3 className="h-2">Ações do James</h3>
+            {actions.length === 0 ? (
+              <div className="text-sm text-gray-600">Sem ações no momento.</div>
+            ) : (
+              <>
+                <ul className="text-sm">
+                  <AnimatePresence>
+                    {actions.map((a: any) => (
+                      <motion.li
+                        key={a.id}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.25 }}
+                        className="py-2 border-b last:border-none flex items-center justify-between"
+                        layout
+                      >
+                        <div>
+                          <div className="font-medium">{a.titulo}</div>
+                          <div className="text-gray-600">{a.justificativa}</div>
+                        </div>
+                        <Pill>{a.status ?? "proposta"}</Pill>
+                      </motion.li>
+                    ))}
+                  </AnimatePresence>
+                </ul>
+                <div className="mt-3">
+                  <Callout>Mostre aqui como a ação aparece primeiro como proposta e só é aplicada após aprovação.</Callout>
+                </div>
+              </>
+            )}
+          </Card>
+        </section>
+
+        <section className="section">
+          <Card>
+            <h3 className="h-2">Itinerário (resumo)</h3>
+            <ul className="text-sm grid md:grid-cols-2 gap-2">
+              <AnimatePresence>
+                {itinerary.slice(0, 4).map((i: any, idx: number) => (
+                  <motion.li
+                    key={i.id}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    className="p-2 rounded-lg bg-brand-muted"
+                    layout
+                  >
+                    {(() => {
+                      const src = imageForItinerary(i.titulo)
+                      return src ? <img src={src} alt={i.titulo} className="h-24 w-full object-cover rounded-lg mb-2" /> : null
+                    })()}
+                    <div className="font-medium">{i.titulo}</div>
+                    <div className="text-xs text-gray-600">
+                      {new Date(i.quando).toLocaleString()} — {i.local}
+                    </div>
+                  </motion.li>
+                ))}
+              </AnimatePresence>
+            </ul>
+          </Card>
+        </section>
       </main>
     </div>
   );
