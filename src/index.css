@@ -3,9 +3,8 @@
 @tailwind utilities;
 @import './theme.css';
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+html,body,#root{height:100%}
+body{background:var(--brand-muted);color:var(--brand-foreground);font-family:InterVar,ui-sans-serif,system-ui}
 
 @layer base {
   :root {
