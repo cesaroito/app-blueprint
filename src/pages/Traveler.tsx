@@ -7,7 +7,7 @@ import { Card, Button, Pill } from '@/components/ui'
 import { copy } from '@/lib/copy'
 import { Tour } from '@/components/Tour'
 import { tourStepsTraveler } from '@/lib/tour'
-import { imageForTip } from '@/lib/images'
+import { imageForTip, imageForItinerary } from '@/lib/images'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Traveler() {
@@ -61,25 +61,27 @@ export default function Traveler() {
           {/* Itinerário */}
           <Card>
             <h3 className="h-2 mb-2">Itinerário</h3>
-            <ul className="text-sm">
+            <div className="grid sm:grid-cols-2 gap-3">
               <AnimatePresence>
                 {itinerary.map(i => (
-                  <motion.li
+                  <motion.div
                     key={i.id}
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.2 }}
-                    className="py-1 border-b last:border-none"
+                    className="rounded-2xl bg-white/90 backdrop-blur border overflow-hidden"
                     layout
                   >
-                    <span className="font-medium">{i.titulo}</span>
-                    <span className="text-gray-600"> — {new Date(i.quando).toLocaleString()}</span>
-                    <div className="text-xs text-gray-500">{i.local}</div>
-                  </motion.li>
+                    {(() => { const src = imageForItinerary(i.titulo); return src ? <img src={src} alt="" className="h-24 w-full object-cover" /> : null })()}
+                    <div className="p-3">
+                      <div className="font-medium">{i.titulo}</div>
+                      <div className="text-xs text-gray-600">{new Date(i.quando).toLocaleString()} — {i.local}</div>
+                    </div>
+                  </motion.div>
                 ))}
               </AnimatePresence>
-            </ul>
+            </div>
           </Card>
         </div>
 
