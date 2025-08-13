@@ -12,7 +12,7 @@ const phases = ['N-90', 'N-60', 'N-30', 'DIA1', 'DIA3', 'POS'] as const
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms))
 
 export default function Demo() {
-  const { fireEventById, moveToPhase, phase, reset } = useJamesStore()
+  const { fireEventById, moveToPhase, phase, reset, autoApprove } = useJamesStore()
 
   const handleAutoPlay = async () => {
     moveToPhase('N-90'); await delay(400)
@@ -25,7 +25,13 @@ export default function Demo() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-semibold">Console de Demonstração</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Console de Demonstração</h1>
+        <label className="text-sm flex items-center gap-2">
+          <input type="checkbox" checked={autoApprove} onChange={e=>useJamesStore.setState({autoApprove:e.target.checked})}/>
+          Aprovação automática
+        </label>
+      </div>
 
       <Card>
         <h2 className="font-semibold mb-2">Cenários</h2>
@@ -59,6 +65,10 @@ export default function Demo() {
             <Pill>~3 min</Pill>
           </div>
           <Button onClick={reset} className="ml-auto bg-white border">Reset Demo</Button>
+        </div>
+        
+        <div className="text-sm text-gray-600 mt-3">
+          <a href="/consultant" className="text-brand-primary hover:underline">Abrir Consultor</a> • <a href="/present" className="text-brand-primary hover:underline">Abrir Apresentação</a>
         </div>
       </Card>
     </div>
